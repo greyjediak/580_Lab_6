@@ -11,7 +11,7 @@ module baud_tick #(
         input logic en,
         output logic tick
     );
-    localparam CLKS_PER_BIT = CLK_FREQ / BAUD;
+    localparam CLKS_PER_BIT = CLK_FREQ / BAUD; // clock cycles, so the baud generator needs to produce a one clock cycle pulse every ~868 FPGA clock cycles
     localparam int COUNTER_W = $clog2(CLKS_PER_BIT);
     logic [COUNTER_W-1:0] r_reg;
     logic [COUNTER_W-1:0] r_next;
