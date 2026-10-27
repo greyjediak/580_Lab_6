@@ -20,9 +20,9 @@ module uart_frame_shift (
         else if (load)
             tx_shift <= {1'b1, data, 1'b0};
         else if (shift)
-            tx_shift <= {1'b1, tx_shift[9:1]};
+            tx_shift <= {1'b1, tx_shift[9:1]}; // concat 1 with upper tx_shift 9 bits
     end
 
-    assign tx = tx_shift[0];
+    assign tx = tx_shift[0]; // LSB
 
 endmodule
