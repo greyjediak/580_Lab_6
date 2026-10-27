@@ -14,7 +14,7 @@ module lab6_top(
     uart_tx #(
         .CLK_FREQ(100_000_000),
         .BAUD(115_200)
-    )(
+    )uart_test(
         .clk(clk),
         .rst(rst),
         .start(start),

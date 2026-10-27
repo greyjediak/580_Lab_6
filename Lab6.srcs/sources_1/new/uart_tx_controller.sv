@@ -53,6 +53,7 @@ module uart_tx_controller (
                 // and baud_en. Start bit timing during LOAD.
                 busy = 1'b1;
                 load = 1'b1;
+                baud_en = 1'b1;
                 bit_clear = 1'b1;
                 next_state = TRANSMIT; // move unconditionally to TRANSMIT.
             end

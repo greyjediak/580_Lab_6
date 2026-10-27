@@ -124,9 +124,9 @@ module tb_uart_tx;
         transmit_and_check(8'hFF, 1'b0);
 
         if (errors == 0) begin
-            $display("PASS: Day 12 UART FSMD mini-lab");
+            $display("PASS: UART Testbench");
         end else begin
-            $display("FAIL: Day 12 UART FSMD mini-lab: %0d errors", errors);
+            $display("FAIL: Lab 6: %0d errors", errors);
             $fatal(1, "UART verification failed");
         end
         $finish;

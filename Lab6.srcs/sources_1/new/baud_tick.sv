@@ -3,28 +3,39 @@
 //                          - Francis Bellany, newest version with amendment by Dwight D. Eisenhower
 
 module baud_tick #(
-    parameter int CLK_FREQ = 100_000_000, 
-    parameter int BAUD = 115_200
-    )(
-        input logic clk,
-        input logic rst,
-        input logic en,
-        output logic tick
-    );
-    
-    localparam CLKS_PER_BIT = CLK_FREQ / BAUD; // clock cycles, so the baud generator needs to produce a one clock cycle pulse every ~868 FPGA clock cycles
-    localparam int COUNTER_W = $clog2(CLKS_PER_BIT);
-    logic [COUNTER_W-1:0] r_reg;
-    logic [COUNTER_W-1:0] r_next;
-    
+    parameter int CLK_FREQ = 100_000_000,
+    parameter int BAUD     = 115_200
+)(
+    input  logic clk,
+    input  logic rst,
+    input  logic en,
+    output logic tick
+);
+
+    localparam int CLKS_PER_BIT = CLK_FREQ / BAUD;
+    localparam int COUNT_W =
+        (CLKS_PER_BIT <= 1) ? 1 : $clog2(CLKS_PER_BIT); //error correction allowance added 
+
+    logic [COUNT_W-1:0] count;
+
     always_ff @(posedge clk) begin
-        if(rst)
-            r_reg <= 0;
-        else
-            r_reg <= r_next;
+        if (rst) begin
+            count <= '0;
+            tick  <= 1'b0;
+        end
+        else if (!en) begin
+            count <= '0;
+            tick  <= 1'b0;
+        end
+        else if (count == CLKS_PER_BIT-1) begin
+            count <= '0;
+            tick  <= 1'b1;
+        end
+        else begin
+            count <= count + 1'b1;
+            tick  <= 1'b0;
+        end
     end
-    //next-state logic
-    assign r_next = !en ? 0 : (r_reg == CLKS_PER_BIT - 1) ? 0 : r_reg + 1;
-    //output logic
-    assign tick = en && !rst && (r_reg == CLKS_PER_BIT - 1); // stays low when en is 0
+
 endmodule
+
