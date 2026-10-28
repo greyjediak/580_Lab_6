@@ -9,8 +9,14 @@ src/uart_tx                 // datapath for UART transmitter, instantiates baud 
 src/lab6_top                // top level wrapper for hardware implementation
 src/ext_write_interface     // interface to send write enable signals to the fifo
 src/fifo                    // fifo module to interface with UART transmitter
-src/ext_write_inteface      // top level write enables
 src/fifo_uart_interface     // interface for the fifo -> uart controller
+sim/tb_baud_tick            // testbench for baud tick generator
+sim/tb_uart_frame_shift     // testbench for frame/shift register
+sim/tb_uart_tx              // testbench for UART transmitter datapath
+sim/tb_fifo_uart_interface  // testbench for fifo -> uart interface
+ece480_lab6.pdf             // lab report
+Basys.xdc                   // constraints file
+demo.mov                    // video hardware demonstration
 
 ## AI Disclosure and Overview
 No AI was used to generate the lab report, figures, README, or code solutions.
