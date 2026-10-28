@@ -1,5 +1,5 @@
 ## Project Overview
-This project contains a UART datapath with a parameterized baud rate generator
+This project contains a UART datapath with a parameterized baud rate generator, and an extended FIFO buffered version for comparison. (581).
 
 ## File Hierarchy
 src/baud_rate_generator     // baud tick generator
