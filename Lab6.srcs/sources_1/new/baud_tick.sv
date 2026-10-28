@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 // "One nation, under God, indivisible, with liberty and justice for all.
-//                          - Francis Bellany, newest version with amendment by Dwight D. Eisenhower
+//                          - Francis Bellamy, newest version with amendment by Dwight D. Eisenhower
 
 module baud_tick #(
     parameter int CLK_FREQ = 100_000_000,
